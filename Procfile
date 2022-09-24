@@ -1,0 +1,1 @@
+web: gunicorn teatime.wsgi --log-file -
