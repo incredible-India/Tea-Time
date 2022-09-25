@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+<title>Create Account : Tea  Time</title>
+{% endblock title %}
+
+{% block content %}
+
+{% include 'core/nav.html' %}
+
+
+
+<div class="container mt-2">
+
+    
+
+    <div class="row">
+
+        <div class="col-sm-8">
+
+            <div class="container mt-2 ">
+                <form action="">
+
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Name" class="form-control mt-2" required>
+                    <p class='text-danger name'  style='display: none;'>*Name should not be blank and less than 3 characters. </p>
+                    <label for="email" class="mt-2">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email" class="form-control mt-2" required>
+                    <p class='text-danger email'  style='display: none;'>*email should not be blank and it should be correct .</p>
+                    <label for="upi" class="mt-2">UPI ID (optional)</label>
+                    <input type="text" name="upi" id="upi" placeholder="upi" class="form-control mt-2" >
+                    <label for="password" class="mt-2">Password</label>
+                    <input type="password" name="password" id="password"  autocomplete="off" placeholder="password" class="form-control mt-2" >
+                    <p class='text-danger password'  style='display: none;'>*password should be greater than 5 digit.</p>
+                    <input type="submit" value="Create Account" class="btn btn-outline-primary mt-4">
+                    <a  class="btn btn-outline-success mt-4 mx-3"> Already have account</a>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+            <img src="{% static 'user/img/sign.svg' %}" alt="" class="img-fluid">
+        </div>
+
+    </div>
+
+</div>
+
+
+{% include 'core/foot.html' %}
+
+
+
+{% endblock content %}
+
+{% block script %}
+
+<script src="{% static 'user/js/crt.js' %}"></script>
+{% endblock script %}
