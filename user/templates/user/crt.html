@@ -9,6 +9,16 @@
 {% include 'core/nav.html' %}
 
 
+{% if messages %}
+{% for i in messages %}
+
+<div class="alert alert-danger">
+    {{i}}
+</div>
+
+{% endfor %}
+{% endif %}
+
 
 <div class="container mt-2">
 
@@ -19,8 +29,8 @@
         <div class="col-sm-8">
 
             <div class="container mt-2 ">
-                <form action="">
-
+                <form action="" method="post">
+                    {% csrf_token %}
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control mt-2" required>
                     <p class='text-danger name'  style='display: none;'>*Name should not be blank and less than 3 characters. </p>
@@ -32,8 +42,8 @@
                     <label for="password" class="mt-2">Password</label>
                     <input type="password" name="password" id="password"  autocomplete="off" placeholder="password" class="form-control mt-2" >
                     <p class='text-danger password'  style='display: none;'>*password should be greater than 5 digit.</p>
-                    <input type="submit" value="Create Account" class="btn btn-outline-primary mt-4">
-                    <a  class="btn btn-outline-success mt-4 mx-3"> Already have account</a>
+                    <input type="submit" value="Create Account" class="btn btn-outline-primary mt-4 mx-3">
+                    <a  class="btn btn-outline-success mt-4 mx-3" href="{% url 'login' %}"> Already have account</a>
 
 
                 </form>

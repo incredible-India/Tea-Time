@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% include 'core/nav.html' %}
+{% include 'core/nav.html' with p=uname %}
 
 
 <div class="container mt-2">
@@ -46,7 +46,7 @@
                             <option value="p">Programming</option>
                         </select>
                       </h5>
-                      <p class="card-text">If you are a new user you can attempt only one time test session. <br>   <br>For attempting multiple times test session please create account.</p>
+                      <p class="card-text">If you are a new user you can attempt only one time test session. <br>   <br>For attempting multiple times test session please <a href="{% url 'crtaccount' %}" class='text-primary'>create account</a> .</p>
                       <a href="#" class="btn btn-outline-primary">Go somewhere</a>
                     </div>
                     <div class="card-footer text-muted">

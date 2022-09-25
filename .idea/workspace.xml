@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1a3fea83-41e6-4378-b20b-54e5051c48f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/user/static/user/js/crt.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/static/user/js/crt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/user/crt.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/crt.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2FGK2oCP6Nj60d0QbJIXP37NsSS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a3fea83-41e6-4378-b20b-54e5051c48f6" name="Changes" comment="" />
+      <created>1664112778752</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664112778752</updated>
+    </task>
+    <servers />
+  </component>
+</project>

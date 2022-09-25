@@ -3,7 +3,7 @@
     <nav class="navbar bg-dark">
 
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img src="{% static 'core/img/tea.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             <b class='text-light' style='font-family:verdana;'>Tea Time</b> 
           </a>
@@ -15,16 +15,34 @@
    
 <nav class="navbar navbar-expand-lg bg-dark text-light">
     <div class="container-fluid">
-      <a class="navbar-brand text-light" href="#" >User <i class="fas fa-user"></i> </a>
+      {% if uname %}
+      <a class="navbar-brand text-light" href="/" >Welcome {{uname | capfirst}} <i class="fas fa-user"></i> </a>
+      {% else %}
+      <a class="navbar-brand text-light" href="/" >User <i class="fas fa-user"></i> </a>
+      {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active text-light" aria-current="page" href="/">Home <i class="fas fa-home"></i> </a>
-          <a class="nav-link text-light" href="{% url 'crtaccount' %}">Create Account <i class="fas fa-user"></i> </a>
-          <a class="nav-link text-light" href="#">Pricing</a>
-          <a class="nav-link disabled text-light">Disabled</a>
+
+          {% if uname %}
+          <a class="nav-link text-light" href="{% url 'crtaccount' %}">Profile <i class="fa-solid fa-id-card"></i></a>
+
+          {% else %}
+          <a class="nav-link text-light" href="{% url 'crtaccount' %}">Create Account  <i class="fa-solid fa-user-plus"></i> </a>
+
+          {% endif %}
+
+          {% if uname %}
+          <a class="nav-link text-light" href="{% url 'logout' %}">Logout <i class="fa-solid fa-right-from-bracket"></i> </a>
+
+          {% else %}
+          <a class="nav-link text-light" href="{% url 'login' %}">Login <i class="fas fa-key"></i> </a>
+
+          {% endif %}
+        
         </div>
       </div>
     </div>

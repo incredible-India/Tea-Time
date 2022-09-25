@@ -19,15 +19,14 @@ let name = document.getElementById('name');
 let email = document.getElementById('email');
 let password = document.getElementById('password');
 
-  
-console.log(name,email,password);
+
 
     if(name.value.trim() == '')
     {
         nameError.innerText = 'name should not be blank';
         nameError.style.display = 'block';
         return;
-    }else if(name.length <= 2 )
+    }else if(name.value.trim().length <= 2 )
     {
         nameError.innerText = 'name should be greater than 2 characters';
         nameError.style.display = 'block';
@@ -37,12 +36,12 @@ console.log(name,email,password);
         emailError.innerText = 'email should not be blank';
         emailError.style.display = 'block';
         return ;
-    }else if(email.length <= 12)
+    }else if(email.value.trim().length <= 12)
     {
         emailError.innerText = 'incorrect email';
         emailError.style.display = 'block';
         return ;
-    }else if(password.value.length <= 5)
+    }else if(password.value.trim().length <= 5)
     {
         passwordError.innerText ='password should be greater than 5 characters';
         passwordError.style.display = 'block';

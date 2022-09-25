@@ -22,3 +22,15 @@ body{
     z-index: 999;
     background-image: linear-gradient(to right,#000,rgb(28, 1, 45));
 }
+
+::-webkit-scrollbar{
+
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    
+    background-image: linear-gradient(#000,blue);
+   
+      border-radius: 20px;
+  }
