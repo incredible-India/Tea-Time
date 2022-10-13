@@ -67,3 +67,19 @@ class deleteTopic(View):
         else:
             return HttpResponse('<h1>invalid topic.. </h1>')
 
+
+class alldelete(View):
+    def get(self, requests,passw):
+        
+
+        if passw != 123456:
+            return HttpResponse('kuchh to gadbad hai daya')
+
+        data = topics.objects.all()
+        if data.exists():
+            data.delete()
+            return HttpResponseRedirect('/controlroom')
+        else:
+            return HttpResponse('kuchh to gadbad hai daya')
+
+

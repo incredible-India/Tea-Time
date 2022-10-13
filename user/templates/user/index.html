@@ -48,7 +48,7 @@
                      
                       <select name="course" id="course" class="form-control  ">
                         {% for i in topic %}
-                          <option value="{{i.id}}">{{i.tname}}</option>
+                          <option value="{{i.id}}">{{i.tname | capfirst}}</option>
                           {% endfor %}
                       </select>
                    
@@ -58,12 +58,16 @@
                   </div>
                  
                    {% else %}
+                   <img src="{% static 'user/img/a.svg' %}" alt="" class="img-fluid" style="width: 100%; height: 300px;">
+
                    <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
 
                    <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err105</h3>
                    {% endif %}
 
                   {% else %}
+                  <img src="{% static 'user/img/a.svg' %}" alt="" class="img-fluid" style="width: 100%; height: 300px;">
+
                   <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
 
                   <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err104</h3>
@@ -71,6 +75,8 @@
                   {% endif %}
                  
                   {% else %}
+                  <img src="{% static 'user/img/a.svg' %}" alt="" class="img-fluid" style="width: 100%; height: 300px;">
+
                  <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
 
                   <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err101</h3>

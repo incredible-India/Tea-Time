@@ -86,3 +86,16 @@ QuizEnableButton.addEventListener('change',(e)=>{
           }       
         }
       }
+
+
+      //on click all delete topic 
+
+      function myfnc() {
+
+      x =  confirm("Are you sure you want to delete all course..(you cannot recover it back.)")
+
+      if(x){
+        location.href = window.location.href + 'alldelete/topic/123456'
+      }
+
+      }
