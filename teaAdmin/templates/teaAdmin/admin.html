@@ -1,0 +1,149 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+<title>Admin Control Room</title>
+{% endblock title %}
+
+
+{% block content %}
+
+
+<h2 class="text-center container mt-2"><i class="fa-solid fa-screwdriver-wrench"></i>  Admin Control Room </h2>
+
+
+
+
+<div class="socket" style="display: none;">
+
+    <h1 class="text-center container mt-4">
+
+        Websocket Connection Is Closed. 
+
+
+    </h1>
+
+</div>
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-4">
+            <p><b>Quiz App Button </b></p>
+            <hr>
+            {% if isEnableDBS %}
+            
+          {% for i in isEnableDBS %}
+          
+          
+       <div class="datatoenter">
+        {% if i.isEnable %}
+        <input type="checkbox" name="quiz" id="quiz" checked> <label for="quiz">Disable</label>
+        <p class='bg-success mt-2 status'>Status : Your Quiz Application is Enabled.</p>
+
+
+       
+        {% else %}
+        <input type="checkbox" name="quiz" id="quiz"> <label for="quiz">Enable</label>
+        <p class='bg-danger mt-2 status'>Status : Your Quiz Application is Disbaled.</p>
+        {% endif %}
+       </div>
+         
+          {% endfor %}
+            
+           {% else %}
+           
+           <p>Something went wrong !!!</p>
+           
+            {% endif %}
+           
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container mt-2">
+
+<div class="row">
+
+    <div class="col-sm-4" > 
+        <hr>
+        <p>Add Topics</p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="topic" id="topic" class="form-control" placeholder="Enter topic" required>
+
+           {% if messages %}
+           
+           {% for i in messages %}
+           <div class="container mt-2 text-danger">
+              {{i}}  
+        </div>
+           {% endfor %}
+           {% endif %}
+
+            <input type="submit" value="submit" class="btn btn-outline-primary mt-4">
+        </form>
+
+    </div>
+
+
+    <div class="col-sm-8">
+        {% if topic %}
+        <p class='mx-2'>Your Topics </p>
+        <p class='mx-2'>Total Topics : {{tl}} </p>
+        <hr>
+        <input type="text" name="myInput" id="myInput" class="myInput" onkeyup="myFunction()" placeholder="Search...">
+            <hr>
+      <div class="container mt-2 mx-2" style='overflow-x:scroll;'>
+        <table class="table table-striped table-dark"  id='myTable'>
+            <thead>
+              <tr>
+                <th scope="col">SI. No.</th>
+                <th scope="col">Topic Name</th>
+                <th scope="col" colspan="2">Action</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+          
+                {% for i in topic %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{i.tname}}</td>
+                    <td><a href="/controlroom/delete/topic/{{i.id}}" class='text-danger'>Delete Topic</a></td>
+                    <td><a href="/controlroom/see/topic/{{i.id}}" class='text-info'>Questions</a></td>
+                   
+                  </tr>
+                {% endfor %}
+             
+            </tbody>
+          </table>
+      </div>
+
+        {% else %}
+        
+
+        <div class="container mt-3">
+            <p>Your Topics</p>
+            <hr>
+            <h3 class="text-center ">Sorry, There is no any topic. <i class="fas fa-book"></i> </h3>
+        </div>
+
+        {% endif %}
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock content %}
+{% block script %}
+<script src="{% static 'teaAdmin/js/admin.js' %}"></script>
+
+{% endblock script %}

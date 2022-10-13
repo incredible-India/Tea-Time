@@ -6,16 +6,30 @@ from .middleware import istrusted
 from django.utils.decorators import method_decorator
 from django.db.models import Q
 
+from teaAdmin.models import topics,QuizStatus
+
 # Create your views here.
+
 
 
 class home(View):
     @method_decorator(istrusted)
     def get(self,request):
+        #checking the topics and the button 
+
+        button = QuizStatus.objects.all().first()
+        topic = topics.objects.all()
+
         if request.isauth :
-            return render(request,'user/index.html',{'uname' : request.name})
+
+
+
+            return render(request,'user/index.html',{'uname' : request.name,
+            'btn':button,'topic' : topic})
         else:
-            return render(request,'user/index.html')
+            return render(request,'user/index.html',{
+                'btn':button,'topic' : topic
+            })
 
 
 

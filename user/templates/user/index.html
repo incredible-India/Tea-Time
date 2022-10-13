@@ -38,19 +38,45 @@
                     <div class="card-header">
                       Select Topic
                     </div>
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        <select name="course" id="course" class="form-control  ">
-                            <option value="p">Programming</option>
-                            <option value="p">Programming</option>
-                            <option value="p">Programming</option>
-                        </select>
-                      </h5>
-                      <p class="card-text">If you are a new user you can attempt only one time test session. <br>   <br>For attempting multiple times test session please <a href="{% url 'crtaccount' %}" class='text-primary'>create account</a> .</p>
-                      <a href="#" class="btn btn-outline-primary">Go somewhere</a>
-                    </div>
+                   {% if btn %}
+                   {% if btn.isEnable %}
+                   
+                   {% if topic %}
+                  
+                   <div class="card-body">
+                    <h5 class="card-title">
+                     
+                      <select name="course" id="course" class="form-control  ">
+                        {% for i in topic %}
+                          <option value="{{i.id}}">{{i.tname}}</option>
+                          {% endfor %}
+                      </select>
+                   
+                    </h5>
+                    <p class="card-text">If you are a new user you can attempt only one time test session. <br>   <br>For attempting multiple times test session please <a href="{% url 'crtaccount' %}" class='text-primary'>create account</a> .</p>
+                    <a href="#" class="btn btn-outline-primary">Go somewhere</a>
+                  </div>
+                 
+                   {% else %}
+                   <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
+
+                   <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err105</h3>
+                   {% endif %}
+
+                  {% else %}
+                  <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
+
+                  <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err104</h3>
+
+                  {% endif %}
+                 
+                  {% else %}
+                 <h3> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
+
+                  <h3 class="text-center">Sorry, site is under maintainance. Soon we will come back. Err101</h3>
+                   {% endif %}
                     <div class="card-footer text-muted">
-                      2 days ago
+                      2 minutes ago
                     </div>
                   </div>
             </div>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['himitea.herokuapp.com','localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'user',
+    'teaAdmin',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +73,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'teatime.wsgi.application'
+# WSGI_APPLICATION = 'teatime.wsgi.application'
+ASGI_APPLICATION = 'teatime.asgi.application'
 
 
 # Database
