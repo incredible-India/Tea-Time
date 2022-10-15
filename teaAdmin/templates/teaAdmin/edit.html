@@ -1,0 +1,167 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block title %}
+
+<title>Edit Questions : Tea Time</title>
+
+{% endblock title %}
+
+
+{% block content %}
+
+<h2 class="text-center container mt-2"><i class="fa-solid fa-screwdriver-wrench"></i>  Admin Control Room  </i> </h2>
+
+<div class="container mt-2">
+    <a href="/controlroom" class="text-info container mt-2"><i class="fas fa-home"> Home</i></a>
+</div>
+{% if messages %}
+
+{% for i in messages %}
+
+<div class="container mt-2 alert alert-success">
+    {{i}}
+</div>
+{% endfor %}
+{% endif %}
+
+<p class="container mt-2"><b>Question ~</b></p>
+
+<h4 class="container mt-2">
+    {% if qt %}
+    
+    {% for i  in qt %}
+    {{i.question}}
+    {% endfor %}
+
+    {% else %}
+    <p>something went wrong..</p>
+    {% endif %}
+</h4>
+
+<div class="container mt-2">
+
+    <ol>
+        {% if opt %}
+        
+        {% for i in opt %}
+        
+        <li class='mt-2'>{{i.opt1}}</li>
+        <li class='mt-2'>{{i.opt2}}</li>
+        <li class='mt-2'>{{i.opt3}}</li>
+        <li class='mt-2'>{{i.opt4}}</li>
+
+        <li class='mt-2 text-info'>Answer :{{i.ans}}</li>
+        
+        {% endfor %}
+
+        {% else %}
+        <li>No option here..</li>
+        {% endif %}
+    </ol>
+
+</div>
+
+
+<div class="container mt-2">
+    <form action="" method="post">
+
+        {% csrf_token %}
+<div class="row">
+
+ 
+
+        <div class="col-sm-8">
+
+            {% if qt %}
+            
+            {% for i in qt %}
+            {{i.question|json_script:"myquestion"}}
+            {% endfor %}
+            <textarea name="quest" id="quest" cols="30" rows="10"  class="form-control" required></textarea>
+
+            {% else %}
+            <textarea name="quest" id="quest" cols="30" rows="10"  class="form-control" required></textarea>
+
+            {% endif %}
+        </div>
+
+        <div class="col-sm-4">
+
+
+            {% if opt %}
+            {% for i in opt %}
+            <label for="opt1" >Option 1</label>
+            <input type="text" name="opt1" id="opt1" value={{i.opt1}} class="form-control" required>
+            <label for="opt2" class='mt-2'>Option 2</label>
+            <input type="text" name="opt2" id="opt2" value={{i.opt2}} class="form-control" required>
+            <label for="opt3" class='mt-2'>Option 3</label>
+            <input type="text" name="opt3" id="opt3" value={{i.opt3}} class="form-control" required>
+            <label for="opt4" class='mt-2'>Option 4</label>
+            <input type="text" name="opt4" id="opt4" value={{i.opt4}} class="form-control" required>
+
+            <label for="ans">Answer</label>
+            <select name="ans" id="ans" class="form-control mt-2" required>
+
+                {% if i.ans == 1 %}
+                <option value="1" selected>1</option>
+                {% else %}
+                <option value="1">1</option>
+                {% endif %}
+
+                {% if i.ans == 2 %}
+                <option value="2" selected>2</option>
+                {% else %}
+                <option value="2">2</option>          
+                      {% endif %}
+
+
+                      {% if i.ans == 3 %}
+                      <option value="3" selected>3</option>
+                      {% else %}
+                      <option value="2">3</option>          
+                            {% endif %}
+            
+                            {% if i.ans == 3 %}
+                            <option value="3" selected>3</option>
+                            {% else %}
+                            <option value="3">3</option>          
+                                  {% endif %}
+
+                                  {% if i.ans == 4 %}
+                                  <option value="4" selected>4</option>
+                                  {% else %}
+                                  <option value="4">4</option>          
+                                        {% endif %}
+
+
+
+            </select>
+
+
+            <input type="submit" value="Edit" class="btn btn-primary mt-2">
+
+            {% endfor %}
+            {% endif %}
+
+           
+
+        </div>
+ 
+</div>
+</form>
+</div>
+
+<script>
+
+    try{
+        let question = JSON.parse(document.getElementById("myquestion").textContent)
+        document.getElementById("quest").value= question
+    }catch(e){
+    console.error('No data from the server side is getting')
+    }
+
+
+</script>
+{% endblock content %}

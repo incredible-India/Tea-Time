@@ -153,3 +153,60 @@ class addQuestion(View):
 
 
 
+
+#deleting the questions 
+
+class deleteQuestion(View):
+    def get(self, request,id,tid):
+        isExist = questions.objects.filter(Q(id=id) & Q(topic = topics.objects.get(id=tid)))
+
+        if isExist.exists():
+            isExist.delete()
+            return HttpResponseRedirect(f'/controlroom/see/topic/{tid}')
+
+        else:
+            return HttpResponse('<Kuchh to gadbad hai daya</h1>')
+
+
+class editQuestion(View):
+    def get(self, request,qid,tid,oid):
+        #checking the database ...
+        isExist = questions.objects.filter(Q(id=qid) & Q(topic = topics.objects.get(id=tid)))
+
+        if isExist.exists():
+            isopt = option.objects.filter(Q(id=oid) & Q(topic = topics.objects.get(id=tid)) & Q(questions = questions.objects.get(id=qid)))
+
+            if isopt.exists():
+                return render(request, 'teaAdmin/edit.html',{
+                    'qt':isExist, 'opt' :isopt
+                })
+            else:
+                return HttpResponse('Again kuchh to gadbad hai')
+        else:
+            return HttpResponse('Gadbad hai bhai, kuchh to gadbad hai')
+    
+
+    def post(self,request,qid,tid,oid):
+
+        quest = request.POST.get('quest')
+        opt1 = request.POST.get('opt1')
+        opt2 = request.POST.get('opt2')
+        opt3 = request.POST.get('opt3')
+        opt4 = request.POST.get('opt4')
+        ans = request.POST.get('ans')
+        isExist = questions.objects.filter(Q(id=qid) & Q(topic = topics.objects.get(id=tid)))
+
+        if isExist.exists():
+            isopt = option.objects.filter(Q(id=oid) & Q(topic = topics.objects.get(id=tid)) & Q(questions = questions.objects.get(id=qid)))
+
+            if isopt.exists():
+                isExist.update(question = quest)
+                isopt.update(opt1=opt1,opt2=opt2,opt3=opt3,opt4=opt4,ans=ans)
+
+                messages.success(request,'Question Updated successfully..')
+
+                return HttpResponseRedirect(f'/controlroom/edit/question/{qid}/{tid}/{oid}/')
+            else:
+                return HttpResponse('Again kuchh to gadbad hai')
+        else:
+            return HttpResponse('Gadbad hai bhai, kuchh to gadbad hai')

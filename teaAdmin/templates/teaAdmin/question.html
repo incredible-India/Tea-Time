@@ -124,7 +124,7 @@
 
         {% if opt %}
         {% for j in opt %}
-        {% if i.id == j.id %}
+        {% if i.id == j.questions.id %}
         
         <td>{{j.opt1}}</td>
         <td>{{j.opt2}}</td>
@@ -132,8 +132,8 @@
         <td>{{j.opt4}}</td>
         <td>{{j.ans}}</td>
 
-        <td><a href="/delete/question/{{i.id}}/" class="text-danger">Delete</a>
-       <a href="/edit/question/{{i.id}}/" class="text-info mx-2">Edit</a></td>
+        <td><a href="{% url 'delquestion' id=i.id tid=i.topic.id %}" class="text-danger">Delete</a>
+       <a href="{% url 'editquestion' qid=i.id tid=i.topic.id oid=j.id %}" class="text-primary info mx-2">Edit</a></td>
         {% endif %}
         {% endfor %}
         {% else %}
