@@ -1,0 +1,157 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block title %}
+<title>Control Room : Add questions</title>
+
+{% endblock title %}
+
+
+{% block content %}
+<h2 class="text-center container mt-2"><i class="fa-solid fa-screwdriver-wrench"></i>  Admin Control Room  </i> </h2>
+
+
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-6">
+            {% if topicname %}
+            {% for i in topicname %}
+            <h3 >{{i.tname | capfirst}} 
+            </h3>
+            <a href="/controlroom" class="text-info"><i class="fas fa-home"> Home</i></a>
+            <hr>
+
+            {% endfor %}
+
+     
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container mt-2">
+    <p>* Question should not be blank or less than 10 characters. </p>
+    <p>* Options should not be  or less than 1 characters.</p>
+</div>
+
+<form action="" method="post">
+
+    {% csrf_token %}
+<div class="container mt-2">
+    <div class="row">
+      
+
+        <div class="col-sm-8">
+            
+            <label for="question">Add Questions</label>
+            <textarea name="question" id="question" cols="30" rows="10" class="form-control" required></textarea>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="opt1" class="mt-2">Option 1 </label>
+            <input type="text" name="opt1" id="opt1" class="form-control" placeholder="Option 1" required>
+            <label for="opt2" class="mt-2">Option 2 </label>
+            <input type="text" name="opt2" id="opt2" class="form-control" placeholder="Option 2" required>
+            <label for="opt3" class="mt-2">Option 3 </label>
+            <input type="text" name="opt3" id="opt3" class="form-control" placeholder="Option 3" required>
+            <label for="opt4" class="mt-2">Option 4 </label>
+            <input type="text" name="opt4" id="opt4" class="form-control" placeholder="Option 4" required>
+
+            <label for="ans" class='mt-2'>Answer For This Question</label>
+            <select name="ans" id="ans" class="form-control" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+       
+    </div>
+    <input type="submit" value="submit" class="btn btn-outline-info mt-2 ">
+
+    <div class="mt-2">
+        {% if messages %}
+        {% for i in messages %}
+        <p class='text-danger'>{{i}}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+</form>
+
+
+
+<div class="container mt-3">
+
+    <h3>All Questions  ({{total}})</h3>
+    <hr>
+    {% if topicname %}
+    {% for i in topicname %}
+    <h3 >{{i.tname | capfirst}} 
+    </h3>
+  
+
+    {% endfor %}
+
+
+    {% else %}
+
+    {% endif %}
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+           
+            <th scope="col" >Question</th>
+            <th scope="col" >Opt1</th>
+            <th scope="col" >Opt2</th>
+            <th scope="col" >Opt3</th>
+            <th scope="col" >Opt4</th>
+            <th scope="col">Ans</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% if quest %}
+      
+      {% for i in quest %}
+      <tr>
+        <td>{{i.question | capfirst}}</td>
+
+        {% if opt %}
+        {% for j in opt %}
+        {% if i.id == j.id %}
+        
+        <td>{{j.opt1}}</td>
+        <td>{{j.opt2}}</td>
+        <td>{{j.opt3}}</td>
+        <td>{{j.opt4}}</td>
+        <td>{{j.ans}}</td>
+
+        <td><a href="/delete/question/{{i.id}}/" class="text-danger">Delete</a>
+       <a href="/edit/question/{{i.id}}/" class="text-info mx-2">Edit</a></td>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <td>N/A</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+      
+      {% else %}
+      <h3>
+        No Questions yet..
+      </h3>
+      {% endif %}
+         
+         
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock content %}

@@ -117,7 +117,7 @@
                     <th scope="row">1</th>
                     <td>{{i.tname | capfirst}}</td>
                     <td><a href="/controlroom/delete/topic/{{i.id}}" class='text-danger'>Delete Topic</a></td>
-                    <td><a href="/controlroom/see/topic/{{i.id}}" class='text-info'>Questions</a></td>
+                    <td><a href="{% url 'question'  id=i.id %}" class='text-info'>Questions</a></td>
                    
                   </tr>
                 {% endfor %}

@@ -1,7 +1,11 @@
+from http.client import HTTPResponse
+from xml.dom.xmlbuilder import Options
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.views import View
-from .models import QuizStatus,topics
+from .models import QuizStatus, questions,topics,option
+from django.db.models import Q
+
 # Create your views here.
 
 
@@ -81,5 +85,71 @@ class alldelete(View):
             return HttpResponseRedirect('/controlroom')
         else:
             return HttpResponse('kuchh to gadbad hai daya')
+
+
+
+
+#todo for adding the question to the selected topics 
+
+class addQuestion(View):
+    def get(self, request,id):
+
+        topicname = topics.objects.filter(id=id) 
+
+
+
+        if topicname.exists():
+
+            quest = questions.objects.filter(topic = topics.objects.get(id=id))
+
+            opt = option.objects.filter(topic = topics.objects.get(id=id) )
+            return render(request,'teaAdmin/question.html',{'topicname':topicname
+            ,'quest':quest,'opt':opt,'total' : len(quest)})
+
+            
+        else:
+            return HttpResponse('<h1> Something went wrong </h1>')
+        
+    def post(self,request,id):
+        
+        quest = request.POST.get('question')
+        opt1 = request.POST.get('opt1')
+        opt2 = request.POST.get('opt2')
+        opt3 = request.POST.get('opt3')
+        opt4 = request.POST.get('opt4')
+        ans = request.POST.get('ans')
+
+        if len(quest.strip()) < 9:
+            messages.error(request,'Question Should not be blank or less than 10 characters..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+        if len(opt1.strip()) < 1:
+            messages.error(request,'option 1 Should not be blank or less than 1 characters..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+        if len(opt2.strip()) < 1:
+            messages.error(request,'Option 2 Should not be blank or less than 1 characters..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+        if len(opt3.strip()) < 1:
+            messages.error(request,'Option 3 Should not be blank or less than 1 characters..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+        if len(opt4.strip()) < 1:
+            messages.error(request,'Option 4 Should not be blank or less than 1 characters..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+
+        
+        que =  questions.objects.filter(Q(question = quest) & Q(topic=topics.objects.get(id=id)))
+
+        if que.exists():
+            messages.error(request,'Question Already Exist..')
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+        else:
+            #question save the first
+            questions.objects.create(question=quest, topic = topics.objects.get(id=id)).save()
+            #now save the options 
+            
+            option.objects.create(questions=questions.objects.get(question=quest), topic = topics.objects.get(id=id),opt1=opt1, opt2=opt2,opt3=opt3, opt4=opt4,ans=ans).save()
+            return HttpResponseRedirect(f'/controlroom/see/topic/{id}')
+
+
+
 
 
